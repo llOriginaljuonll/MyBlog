@@ -12,7 +12,23 @@
 	<title>{% block title %}{% endblock title %}</title>
 </head>
 <body>
-	
+	<!-- Navbar -->
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<div class="container-fluid">
+		  <a class="navbar-brand" href="#">
+			<h4 style="font-weight: 400;">BS Mentality</h4>
+		  </a>
+
+		  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+			  <li class="nav-item">
+				<a class="navbar-brand nav-link active mb-1" href="#">บทความ</a>
+			  </li>
+		  </div>
+
+		</div>
+	  </nav>
+	  <!-- /navbar -->
 	{% block content %}{% endblock content %}
 
 	<!-- Bootstrap JS -->
