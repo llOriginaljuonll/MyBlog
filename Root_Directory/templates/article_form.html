@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}แบบฟอร์มการเขียนบทความ{% endblock title %}
+{% block content %}
+<br>
+<div class="text-center"><h1>BLACK SMITH</h1></div>
+<br>
+<form method="POST" action="" class="container-fluid">
+{% csrf_token %}
+	<div class="container border border-dark">
+		<div>{{form|crispy}}</div>
+	</div>
+</form>
+
+{% endblock content %}
