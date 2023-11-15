@@ -1,17 +1,31 @@
 {% extends "base.html" %}
-{% load static %}
 {% load crispy_forms_tags %}
+{% load static %}
 
 {% block title %}แบบฟอร์มการเขียนบทความ{% endblock title %}
+<body class="bg-dark">
 {% block content %}
-<br>
-<div class="text-center"><h1>BLACK SMITH</h1></div>
-<br>
-<form method="POST" action="" class="container-fluid">
-{% csrf_token %}
-	<div class="container border border-dark">
-		<div>{{form|crispy}}</div>
+<div class="container-fluid bg-light">
+	<br> <!-- เว้นบรรทัด -->
+
+	<div class="text-center">
+		<h1 class="col-3 m-auto">BLACK SMITH</h1>
 	</div>
-</form>
+	<br> <!-- เว้นบรรทัด -->
+
+		<form method="POST" action="" class="container card border border-dark">
+			{% csrf_token %}
+			<div class="container">
+				{{ form | crispy }}
+			</div>
+
+			<div class="text-center mb-3">
+				<input class="btn btn-outline-dark" type="submit" value="Submit">
+			</div>
+		</form>
+	<br> <!-- เว้นบรรทัด -->
+
+</div>
+
 
 {% endblock content %}
