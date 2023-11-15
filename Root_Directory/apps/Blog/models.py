@@ -12,4 +12,4 @@ class WriterBlog(models.Model):
 		verbose_name_plural = "ข้อมูลบทความ"
 
 	def __str__(self):
-		return str(self.id) + "#" + " " + self.writer + " " + self.article_name
+		return "#" + str(self.id) + " " + self.writer + " " + self.article_name
