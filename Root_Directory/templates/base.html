@@ -7,26 +7,31 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 	<!--Bootstrap CSS -->
-	<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
-
+	<link href="{% static 'css/bootstrap/bootstrap.min.css' %}" rel="stylesheet">
+	
 	<title>{% block title %}{% endblock title %}</title>
+	{% block head %}{% endblock head %}
 </head>
 <body>
 	<!-- Navbar -->
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 		<div class="container-fluid">
 		  <a class="navbar-brand" href="#">
-			<h3 style="font-weight: 400;" class="ms-2">BSM</h3>
+			<h3 class="ms-2" style="font-family: Ubuntu;">BSM</h3>
 		  </a>
 
-		  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+		  <div class="collapse navbar-collapse" id="navbarSupportedContent" style="font-family: Ubuntu;">
 			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 			  <li class="nav-item">
-				<a class="navbar-brand nav-link active mb-1" href="#">บทความ</a>
+				<a class="navbar-brand nav-link active mb-1" href="{% url 'blog:blog_home' %}">articles</a>
 			  </li>
+			  <li class="nav-item">
+				<a class="navbar-brand nav-link active mb-1" href="{% url 'blog:article_form' %}">write</a>
+			  </li>
+			</ul>
 		  </div>
 
-		  <div class="col-2">
+		  <div class="col-4" style="font-family: Ubuntu;">
 			<!-- ยังไม่ได้ใส่ link -->
 			<a href="" class="btn btn-sm btn-outline-light float-end">
 				<b>sign up</b>
@@ -42,6 +47,7 @@
 		</div>
 	  </nav>
 	  <!-- /navbar -->
+
 	{% block content %}{% endblock content %}
 
 	<!-- Bootstrap JS -->

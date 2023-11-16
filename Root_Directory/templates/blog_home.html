@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block title %}BlackSmith Mentality{% endblock title %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/fonts.css' %}">
+<style>
+    p{
+        font-family: Ubntu;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<br><!-- เว้นบรรทัด x 2 -->
+<div class="container-fluid text-center">
+    <p style="font-size: 350%;">รายชื่อบทความทั้งหมด</p>
+    <hr style="color: black;">
+</div>
+<div class="container-fluid w-50">
+    {% for blogs in blogs %}
+        <b><p style="font-size: 300%;">{{ blogs.article_name}}</p></b>
+        <p style="font-size: 100%;" class="w-25 text-center bg-dark text-light">By &nbsp;{{ blogs.writer }}</p>
+        <hr>
+    {% endfor %}
+</div>
+
+
+{% endblock content %}
