@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block title %}เข้าสู่ระบบ{% endblock title %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/fonts.css' %}">
+<style>
+    body{
+        /* ตั้งค่าสีให้เหมือนกับ navbar ที่อ้างอิงมากจาก bootstrap */
+        background-color: #212529;
+    }
+</style>
+{% endblock head %}
+
+{% block content %}
+<div class="container text-center text-light">
+    <form method="post" novalidate class="col-lg-6 card bg-dark m-auto mb-5 mt-5 border border-light">
+        {% csrf_token %}
+
+        <div class="col-8 m-auto mt-2">
+            <h1 class="text-center mt-3 border-bottom col-5 m-auto mb-3">SIGN IN</h1>
+            {{ form.username|as_crispy_field }}
+            {{ form.password|as_crispy_field }}
+            <button class="btn btn-outline-light mb-4 mt-5">SUBMIT</button>
+        </div>
+        
+    </form>
+</div>
+    
+
+    <div class="border-top border-light text-center text-light">
+        <br>
+        <p style="font-size: 15px; font-weight: bold;">Don't have an account yet? <a href="#">Click here</a> to sign up</p>
+    </div>
+
+
+{% endblock content %}

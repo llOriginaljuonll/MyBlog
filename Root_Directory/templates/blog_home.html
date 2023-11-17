@@ -6,24 +6,27 @@
 {% block head %}
 <link rel="stylesheet" href="{% static 'css/fonts.css' %}">
 <style>
-    p{
-        font-family: Ubntu;
+    *{
+        font-family: 'Ubuntu';
     }
 </style>
 {% endblock %}
 
 {% block content %}
 
-<br><!-- เว้นบรรทัด x 2 -->
-<div class="container-fluid text-center">
-    <p style="font-size: 350%;">รายชื่อบทความทั้งหมด</p>
-    <hr style="color: black;">
+<br><!-- เว้นบรรทัด -->
+<div class="container-fluid text-center text-dark">
+    <div style="font-size: 350%; border-style: groove; font-weight: bold;" class="container col-5 rounded">บทความ</div>
 </div>
-<div class="container-fluid w-50">
+<br><br><!-- เว้นบรรทัด x 2 -->
+
+<div class="container-fluid col-7">
     {% for blogs in blogs %}
-        <b><p style="font-size: 300%;">{{ blogs.article_name}}</p></b>
-        <p style="font-size: 100%;" class="w-25 text-center bg-dark text-light">By &nbsp;{{ blogs.writer }}</p>
-        <hr>
+    <p style="font-size: 250%;">
+        <a href="#" style="text-decoration: none;" class="text-dark"><b>{{ blogs.article_name}}</b></a>
+    </p>
+    <span style="font-size: 100%;" class="badge bg-secondary">By &nbsp;{{ blogs.writer }}</span>
+    <hr>
     {% endfor %}
 </div>
 
