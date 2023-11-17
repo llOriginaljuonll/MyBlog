@@ -40,6 +40,7 @@ INSTALLED_APPS = [
 
 	# local apps
 	"apps.blog",
+    "apps.accounts",
 
 	# Third-party apps
 	"crispy_forms",
