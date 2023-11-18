@@ -18,6 +18,13 @@ def sign_in(request):
     
     return render(request, 'accounts/sign_in.html', {
         'form': form
+    })
+
+def sign_out(request):
+    if request.method == 'POST':
+        logout(request)
+        return redirect('/')
+
 def sign_up(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)

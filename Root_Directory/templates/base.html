@@ -16,31 +16,48 @@
 	<!-- Navbar -->
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 		<div class="container-fluid">
-		  <a class="navbar-brand" href="#">
-			<h3 class="ms-2" style="font-family: Ubuntu;">BSM</h3>
-		  </a>
-
-		  <div class="collapse navbar-collapse" id="navbarSupportedContent" style="font-family: Ubuntu;">
-			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-			  <li class="nav-item">
-				<a class="navbar-brand nav-link active mb-1" href="{% url 'blog:blog_home' %}">articles</a>
-			  </li>
-			  <li class="nav-item">
-				<a class="navbar-brand nav-link active mb-1" href="{% url 'blog:article_form' %}">write</a>
-			  </li>
-			</ul>
-		  </div>
-
-		  <div class="col-4" style="font-family: Ubuntu;">
-			<!-- ยังไม่ได้ใส่ link -->
-			<a href="" class="btn btn-sm btn-outline-light float-end">
-				<b>sign up</b>
+			<a class="navbar-brand" href="#">
+				<h3 class="ms-2" style="font-family: Ubuntu;">BSM</h3>
 			</a>
-			<!-- ยังไม่ได้ใส่ link -->
-			<a href="" class="btn btn-sm btn-outline-light float-end me-3">
-				<b>sign in</b>
-			</a>
-		  </div>
+
+			<div class="collapse navbar-collapse" id="navbarSupportedContent" style="font-family: Ubuntu;">
+				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+					<li class="nav-item">
+						<a class="navbar-brand nav-link active mb-1" href="{% url 'blog:blog_home' %}">articles</a>
+					</li>
+					<li class="nav-item">
+						<a class="navbar-brand nav-link active mb-1" href="{% url 'blog:article_form' %}">write</a>
+					</li>
+				</ul>
+			</div>
+
+			{% if user.is_authenticated %}
+			<div class="col-4" style="font-family: Ubuntu;">
+				<form action="{% url 'accounts:sign_out' %}" method="post">
+					{% csrf_token %}
+					<button class="btn btn-sm btn-outline-danger float-end mt-2" 
+							type="submit">
+						<span><strong>SIGN OUT</strong></span>
+					</button>
+				</form>
+				
+				<!-- ยังไม่ได้ใส่ link คิดว่าเป็นลิ้งค์ที่เชื่อมไปดู profile user -->
+				<a href="#" class="btn btn-sm shadow-none float-end col-3 text-light">
+					<h3><strong class="text-capitalize">{{ user.username }}</strong></h3>
+				</a>
+				
+			</div>
+			{% else %}
+			<div class="col-4" style="font-family: Ubuntu;">
+				<!-- ยังไม่ได้ใส่ link -->
+				<a href="" class="btn btn-sm btn-outline-light float-end">
+					<b>SIGN UP</b>
+				</a>
+				<a href="{% url 'accounts:sign_in' %}" class="btn btn-sm btn-outline-light float-end me-3">
+					<b>SIGN IN</b>
+				</a>
+			</div>
+			{% endif %}
 		 
 
 
