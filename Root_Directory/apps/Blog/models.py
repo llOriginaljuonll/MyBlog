@@ -4,7 +4,6 @@ class WriterBlog(models.Model):
 	id: int
 	article_name = models.CharField(max_length=255)
 	content = models.TextField()
-	writer = models.CharField(max_length=255)
 	created = models.DateTimeField(auto_now_add=True)
 
 	class Meta:
@@ -12,4 +11,4 @@ class WriterBlog(models.Model):
 		verbose_name_plural = "ข้อมูลบทความ"
 
 	def __str__(self):
-		return self.writer + " | " + self.article_name
+		return self.article_name

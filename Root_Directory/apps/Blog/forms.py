@@ -15,7 +15,6 @@ class WriterBlogForm(ModelForm):
 			'id',
 			'article_name',
 			'content',
-			'writer',
 		)
 
 		widgets = {
@@ -29,15 +28,11 @@ class WriterBlogForm(ModelForm):
 					   'rows': '20',		
 			}
 			),
-			'writer': forms.TextInput(
-				attrs={'placeholder': 'ชื่อ/นามปากกา ผู้เขียนบทความ'}
-			),
 		}
 
 		labels = {
 			'article_name': '',
 			'content': '',
-			'writer': '',
 		}
 
 

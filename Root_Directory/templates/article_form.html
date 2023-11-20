@@ -24,7 +24,8 @@
 			<br> <!-- เว้นบรรทัด -->
 
 			<div class="container">
-				{{ form|crispy }}
+				{{ form.article_name|as_crispy_field }}
+				{{ form.content|as_crispy_field }}
 			</div>
 
 			<div class="text-center mb-3">
