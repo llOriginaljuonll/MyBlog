@@ -23,7 +23,7 @@ def sign_in(request):
 def sign_out(request):
     if request.method == 'POST':
         logout(request)
-        return redirect('/')
+        return redirect('blog:blog_home')
 
 def sign_up(request):
     if request.method == 'POST':

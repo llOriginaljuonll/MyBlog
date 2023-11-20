@@ -7,6 +7,9 @@
 {% block head %}
 <link rel="stylesheet" href="{% static 'css/fonts.css' %}">
 <style>
+    *{
+        font-family: Ubuntu;
+    }
     body{
         /* ตั้งค่าสีให้เหมือนกับ navbar ที่อ้างอิงมากจาก bootstrap */
         background-color: #212529;
@@ -20,9 +23,8 @@
         {% csrf_token %}
 
         <div class="col-8 m-auto mt-2">
-            <h1 class="text-center mt-3 border-bottom col-5 m-auto mb-3">SIGN IN</h1>
-            {{ form.username|as_crispy_field }}
-            {{ form.password|as_crispy_field }}
+            <h1 class="text-center mt-3 col-5 m-auto mb-3">sign in</h1>
+            {{ form|crispy }}
             <button class="btn btn-outline-light mb-4 mt-5">SUBMIT</button>
         </div>
         
