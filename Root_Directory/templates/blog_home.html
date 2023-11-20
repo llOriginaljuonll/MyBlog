@@ -11,6 +11,7 @@
     }
     .title{
         border-style: groove;
+        cursor: pointer;
     }
     .titlelists{
         border-style: double;
@@ -33,7 +34,7 @@
 <br><!-- เว้นบรรทัด -->
 
 {% for blogs in blogs %}
-<div class="container-fluid col-6 title mb-3 rounded">
+<div class="container-fluid col-6 title mb-3 rounded" onclick='location.href="detail/{{ blogs.pk }}"'>
 	<p style="font-size: 200%;">
 		<a href="#" style="text-decoration: none;" class="text-dark"><b>{{ blogs.article_name }}</b>&nbsp;</a>
 	</p>
