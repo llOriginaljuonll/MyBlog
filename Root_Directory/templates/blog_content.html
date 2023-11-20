@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+
+{% block title %}แบบฟอร์มการเขียนบทความ{% endblock title %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/fonts.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <br>
+    <div class="container">
+        <h1><span class="border-bottom border-dark">{{ blog.article_name }}</span></h1>
+    </div>
+    <br>
+    <div class="container">
+        <p>{{ blog.content }}</p>
+        <br>
+        <h6><span class="badge bg-secondary">By {{ blog.writer }}</span></h6>
+    </div>
+</div>
+{% endblock content %}

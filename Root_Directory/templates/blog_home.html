@@ -1,6 +1,6 @@
 {% extends "base.html" %}
-{% load crispy_forms_tags %}
 {% load static %}
+{% load crispy_forms_tags %}
 
 {% block title %}BlackSmith Mentality{% endblock title %}
 {% block head %}
@@ -9,26 +9,39 @@
     *{
         font-family: 'Ubuntu';
     }
+    .title{
+        border-style: groove;
+    }
+    .titlelists{
+        border-style: double;
+        border-color: #ffffff;
+        font-size: 375%;
+        color: #ffffff;
+        background-color: #000000;
+    }
 </style>
 {% endblock %}
 
 {% block content %}
 
 <br><!-- เว้นบรรทัด -->
-<div class="container-fluid text-center text-dark">
-    <div style="font-size: 350%; border-style: groove; font-weight: bold;" class="container col-5 rounded">บทความ</div>
+<div class="container-fluid text-center text-light">
+    <span class="container col-4 titlelists">
+        Title lists
+    </span>
 </div>
-<br><br><!-- เว้นบรรทัด x 2 -->
+<br><!-- เว้นบรรทัด -->
 
-<div class="container-fluid col-7">
-    {% for blogs in blogs %}
-    <p style="font-size: 250%;">
-        <a href="#" style="text-decoration: none;" class="text-dark"><b>{{ blogs.article_name}}</b></a>
+{% for blogs in blogs %}
+<div class="container-fluid col-6 title mb-3 rounded">
+    <p style="font-size: 200%;">
+        <a href="#" style="text-decoration: none;" class="text-dark"><b>{{ blogs.article_name}}</b>&nbsp;</a>
     </p>
-    <span style="font-size: 100%;" class="badge bg-secondary">By &nbsp;{{ blogs.writer }}</span>
-    <hr>
-    {% endfor %}
+    <span style="font-size: 85%;" class="badge bg-secondary">By &nbsp;{{ blogs.writer }}</span>
+    <br>
+    <p><span style="font-size: 95%;" class="text-secondary mb-5">tag :</span></p>
 </div>
+{% endfor %}
 
 
 {% endblock content %}
