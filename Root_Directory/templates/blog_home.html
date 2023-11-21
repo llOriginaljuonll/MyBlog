@@ -11,6 +11,7 @@
     }
     .title{
         border-style: groove;
+        cursor: pointer;
     }
     .titlelists{
         border-style: double;
@@ -33,13 +34,13 @@
 <br><!-- เว้นบรรทัด -->
 
 {% for blogs in blogs %}
-<div class="container-fluid col-6 title mb-3 rounded">
-    <p style="font-size: 200%;">
-        <a href="#" style="text-decoration: none;" class="text-dark"><b>{{ blogs.article_name}}</b>&nbsp;</a>
-    </p>
-    <span style="font-size: 85%;" class="badge bg-secondary">By &nbsp;{{ blogs.writer }}</span>
-    <br>
-    <p><span style="font-size: 95%;" class="text-secondary mb-5">tag :</span></p>
+<div class="container-fluid col-6 title mb-3 rounded" onclick='location.href="detail/{{ blogs.pk }}"'>
+	<p style="font-size: 200%;">
+		<a href="#" style="text-decoration: none;" class="text-dark"><b>{{ blogs.article_name }}</b>&nbsp;</a>
+	</p>
+	<span style="font-size: 85%;" class="badge bg-secondary">By &nbsp;BS Mentality</span>
+	<br>
+	<p><span style="font-size: 95%;" class="text-secondary mb-5">tag :</span></p>
 </div>
 {% endfor %}
 
