@@ -7,19 +7,33 @@
 
 {% block head %}
 <link rel="stylesheet" href="{% static 'css/fonts.css' %}">
+<style>
+    button{
+        font-family: Ubuntu;
+    }
+    a{
+        text-decoration: none;
+    }
+</style>
 {% endblock %}
 
 {% block content %}
 <div class="container-fluid">
     <br>
-    <div class="container">
-        <h1><span class="border-bottom border-dark">{{ blog.article_name }}</span></h1>
-    </div>
-    <br>
-    <div class="container">
-        <p>{{ blog.content }}</p>
+    <div class="container card border border-secondary">
+        <div class="container card-body">
+            <h1 class="">
+                <span class="border-bottom border-dark">{{ blog.article_name }}</span>
+                <button class="btn btn-outline-danger float-end mt-2 ms-2">Delete</button>
+                <button class="btn btn-dark float-end mt-2"><a href="/edit/{{ blog.pk }}" class="text-light">Edit article</a></button>
+            </h1>
+        </div>
         <br>
-        <h6><span class="badge bg-secondary">By {{ user.username }}</span></h6>
+        <div class="container card-body mb-3">
+            <p>{{ blog.content }}</p>
+            <br>
+            <h6><span class="badge bg-secondary">By {{ user.username }}</span></h6>
+        </div>
     </div>
 </div>
 {% endblock content %}
