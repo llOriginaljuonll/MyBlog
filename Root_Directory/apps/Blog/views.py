@@ -8,12 +8,13 @@ def blog_home(request):
 
 def article_form(request): 
 	if request.method == 'POST':
-		form = BlogForm(request.POST)
+		blog = Blog(writer=request.user)
+		form = BlogForm(request.POST, instance=blog)
 		if form.is_valid():
 			form.save()
-			return redirect('/')
+			return redirect('blog_home.html')
 		else:
-			return render(request, '/', {'form': form})
+			return render(request, 'article_form.html', {'form': form})
 	else:
 		form = BlogForm()
 		return render(request, 'article_form.html', {'form': form})

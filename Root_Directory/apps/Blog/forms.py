@@ -15,6 +15,7 @@ class BlogForm(ModelForm):
 			'id',
 			'article_name',
 			'content',
+			'writer',
 		)
 
 		widgets = {
