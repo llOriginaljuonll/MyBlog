@@ -1,15 +1,15 @@
 from django import forms
 from django.forms import ModelForm
-from .models import WriterBlog
+from .models import Blog
 
 """
 1.ชื่อไฟล์ forms.py ที่จริงเป็นชื่ออื่นก็ได้(แต่ต้องลงท้าย ".py") สิ่งสำคัญคือต้องมีการเขียน from django import forms เข้ามาถึงจะใช้งาน django form ได้
 """
-class WriterBlogForm(ModelForm):
+class BlogForm(ModelForm):
 
 	class Meta:
 
-		model = WriterBlog
+		model = Blog
 
 		fields = (
 			'id',
