@@ -3,7 +3,7 @@
 {% load crispy_forms_tags %}
 
 
-{% block title %}แบบฟอร์มการเขียนบทความ{% endblock title %}
+{% block title %}{{ blog.article_name }}{% endblock title %}
 
 {% block head %}
 <link rel="stylesheet" href="{% static 'css/fonts.css' %}">
@@ -19,7 +19,7 @@
     <div class="container">
         <p>{{ blog.content }}</p>
         <br>
-        <h6><span class="badge bg-secondary">By {{ blog.writer }}</span></h6>
+        <h6><span class="badge bg-secondary">By {{ user.username }}</span></h6>
     </div>
 </div>
 {% endblock content %}
