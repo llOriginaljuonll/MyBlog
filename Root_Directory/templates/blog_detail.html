@@ -24,7 +24,7 @@
         <div class="container card-body">
             <h1 class="">
                 <span class="border-bottom border-dark">{{ blog.article_name }}</span>
-                <button class="btn btn-outline-danger float-end mt-2 ms-2"><a href="/delete/{{ blog.id }}">Delete</a></button>
+                <button class="btn btn-outline-danger float-end mt-2 ms-2"><a href="/delete/{{ blog.id }}" onclick="return confirm('Do you sure want to delete this article?')">Delete</a></button>
                 <button class="btn btn-dark float-end mt-2"><a href="/edit/{{ blog.pk }}" class="text-light">Edit article</a></button>
             </h1>
         </div>
