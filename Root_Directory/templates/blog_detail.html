@@ -19,21 +19,28 @@
 
 {% block content %}
 <div class="container-fluid">
-    <br>
+<br><!-- เว้นบรรทัด -->
+
     <div class="container card border border-secondary">
         <div class="container card-body">
-            <h1 class="">
-                <span class="border-bottom border-dark">{{ blog.article_name }}</span>
-                <button class="btn btn-outline-danger float-end mt-2 ms-2"><a href="/delete/{{ blog.id }}" onclick="return confirm('Do you sure want to delete this article?')">Delete</a></button>
+            <h1>
+                <span class="border-bottom border-dark">
+                    {{ blog.article_name }}
+                </span>
+                <a href="/delete/{{ blog.id }}" onclick="return confirm('Do you sure to delete this article?')">
+                    <button class="btn btn-danger float-end mt-2 ms-2">
+                        Delete
+                    </button>
+                </a>
                 <button class="btn btn-dark float-end mt-2"><a href="/edit/{{ blog.pk }}" class="text-light">Edit article</a></button>
             </h1>
         </div>
-        <br>
         <div class="container card-body mb-3">
             <p>{{ blog.content }}</p>
             <br>
-            <h6><span class="badge bg-secondary">By {{ user.username }}</span></h6>
+            <h6><span class="badge bg-secondary">By {{ blog.writer }}</span></h6>
         </div>
     </div>
+
 </div>
 {% endblock content %}

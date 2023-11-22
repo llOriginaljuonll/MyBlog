@@ -10,31 +10,30 @@
 {% endblock %}
 
 {% block content %}
-<div class="container-fluid bg-light">
+<div class="container-fluid">
 	<br> <!-- เว้นบรรทัด -->
+	<div class="container col-8">
+		<div class="d-flex justify-content-center container btn bg-dark"> <!-- ศึกษา d-flex & justify เพิ่มเติม -->
+			<h1 class="col-8 text-center text-light" style="font-family: Ubuntu;">BlackSmith Mentality</h1>
+		</div>
+		<br> <!-- เว้นบรรทัด -->
 
-	<div class="d-flex justify-content-center container bg-light btn bg-dark"> <!-- ศึกษา d-flex & justify เพิ่มเติม -->
-		<h1 class="col-5 text-center text-light" style="font-family: Ubuntu;">BlackSmith Mentality</h1>
+			<form method="POST" action="{% url 'blog:article_form' %}" class="container card border border-dark" validate>
+				
+				{% csrf_token %}
+				<br> <!-- เว้นบรรทัด -->
+
+				<div class="container">
+					{{ form.article_name|as_crispy_field }}
+					{{ form.content|as_crispy_field }}
+				</div>
+
+				<div class="text-center mb-3">
+					<input class="btn btn-dark btn-lg" type="submit" value="Submit" style="font-family: Ubuntu;">
+				</div>
+			</form>
+	<br> <!-- เว้นบรรทัด -->
 	</div>
-	<br> <!-- เว้นบรรทัด -->
-
-		<form method="POST" action="{% url 'blog:article_form' %}" class="container card border border-dark" validate>
-			
-			{% csrf_token %}
-			<br> <!-- เว้นบรรทัด -->
-
-			<div class="container">
-				{{ form.article_name|as_crispy_field }}
-				{{ form.content|as_crispy_field }}
-				{{ form.writer|as_crispy_field }}
-			</div>
-
-			<div class="text-center mb-3">
-				<input class="btn btn-dark btn-lg" type="submit" value="Submit" style="font-family: Ubuntu;">
-			</div>
-		</form>
-	<br> <!-- เว้นบรรทัด -->
-
 </div>
 
 

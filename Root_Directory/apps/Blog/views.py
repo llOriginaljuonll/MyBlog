@@ -5,7 +5,8 @@ from django.contrib import messages
 
 def blog_home(request):
 	blogs = Blog.objects.all()
-	return render(request, 'blog_home.html',{'blogs': blogs})
+	popular = Blog.objects.all().order_by('-views')[:3]
+	return render(request, 'blog_home.html',{'blogs': blogs, 'popular': popular})
 
 """
 ส่วนที่น่าสนใจของฟังก์ชั่นนี้
@@ -14,7 +15,6 @@ def blog_home(request):
 -> กระบวนการทำงานของฟังก์ชั่น
   -> ถ้าเป็นการส่งข้อมูลแบบ POST (ดูได้ที่ form ใน template ว่ามีการระบุ method="post" หรือไม่) ให้ทำงานต่อไป
     -> writer_field จะเท่ากับ request.user(อธิบายไว้แล้วในบรรทัดก่อนหน้านี้)
-	-> ปกติการดึง form จาก forms.py เราต้องทำอยู่แล้ว เป็นไปได้ที่เรายังไม่รู้ท่าในการแก้ใน forms.py หรือ models.py เลยต้องใช้ท่านี้ก่อน
 	-> ปกติการดึง form จาก forms.py เราต้องทำอยู่แล้ว แต่ครั้งนี้เราให้อยู่บรรทัดล่างเพื่อรับข้อมูลของ request.user เป็นไปได้ที่เรายังไม่รู้ท่าในการแก้ใน forms.py หรือ models.py เลยต้องใช้ท่านี้ก่อน
 	-> มีการสร้างตัวแปร form เก็บข้อมูลของ BlogForm
 	  -> instance=blog เก็บข้อมูลเฉพาะ blog(ยังรู้ข้อมูลไม่แน่ชัด มีเวลาควรศึกษาเพิ่ม)
@@ -39,6 +39,8 @@ def article_form(request):
 
 def blog_detail(request, blog_id):
 	blog = Blog.objects.get(pk=blog_id)
+	blog.views = blog.views+1
+	blog.save()
 	return render(request, 'blog_detail.html', {'blog': blog})
 
 def blog_edit(request, blog_id):
