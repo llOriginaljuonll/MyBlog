@@ -6,6 +6,7 @@ class Blog(models.Model):
 	content = models.TextField()
 	created = models.DateTimeField(auto_now_add=True)
 	writer = models.ForeignKey(User, on_delete=models.CASCADE,)
+	views = models.IntegerField(default=0)
 
 	class Meta:
 		verbose_name = "ข้อมูลบทความ"
