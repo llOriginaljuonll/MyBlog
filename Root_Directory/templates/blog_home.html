@@ -41,6 +41,7 @@
 	<span style="font-size: 85%;" class="badge bg-secondary">By {{ request.user }}</span>
 	<br>
 	<p><span style="font-size: 95%;" class="text-secondary mb-5">tag :</span></p>
+                <div class="">{% bs_icon 'eye' %}{{ blogs.views|intcomma }} views</div>
 </div>
 {% endfor %}
 
