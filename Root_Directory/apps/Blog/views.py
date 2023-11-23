@@ -5,7 +5,7 @@ from django.contrib import messages
 
 def blog_home(request):
 	blogs = Blog.objects.all()
-	popular = Blog.objects.all().order_by('-views')[:3]
+	popular = Blog.objects.all().order_by('-views')[:4]
 	return render(request, 'blog_home.html',{'blogs': blogs, 'popular': popular})
 
 """
@@ -57,3 +57,4 @@ def blog_delete(request, blog_id):
 	blog.delete()
 	messages.success(request, 'Blog has been successfully deleted.')
 	return redirect('/')
+
