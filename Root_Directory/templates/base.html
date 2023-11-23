@@ -6,17 +6,19 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>{% block title %}{% endblock %}</title>
 
 	<!--Bootstrap CSS -->
 	<link href="{% static 'css/bootstrap/bootstrap.min.css' %}" rel="stylesheet">
-	
-	<title>{% block title %}{% endblock title %}</title>
-	{% block head %}{% endblock head %}
+	<link rel="stylesheet" href="{% static 'css/fonts.css' %}">
+
+	{% block head %}{% endblock %}
 </head>
 <body>
 	<!-- Navbar -->
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 		<div class="container-fluid">
+
 			<a class="navbar-brand" href="#">
 				<h3 class="ms-2" style="font-family: Ubuntu;">BSM.</h3>
 			</a>
@@ -53,10 +55,7 @@
 							<h3><strong class="text-capitalize text-warning">{{ user.username }} !</strong></h3>
 						</a>
 					</li>
-					
-					
 				</ul>
-				
 				
 			</div>
 			{% else %}
@@ -70,14 +69,12 @@
 				</a>
 			</div>
 			{% endif %}
-		 
-
 
 		</div>
-	  </nav>
-	  <!-- /navbar -->
+	</nav>
+	  <!-- End Navbar -->
 
-	{% block content %}{% endblock content %}
+	{% block content %}{% endblock %}
 
 	<!-- Bootstrap JS -->
 	<!-- Bootstrap Bundle with Popper -->

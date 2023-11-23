@@ -9,7 +9,7 @@
 {% block head %}
 <link rel="stylesheet" href="{% static 'css/fonts.css' %}">
 <style>
-    *{
+    .ubuntu{
         font-family: 'Ubuntu';
     }
     .title{
@@ -17,54 +17,52 @@
         cursor: pointer;
     }
     .titlelists{
-        border-style: double;
-        border-color: #ffffff;
+        
         font-size: 375%;
-        color: #ffffff;
-        background-color: #000000;
     }
 </style>
 {% endblock %}
 
 {% block content %}
-
-<br><!-- เว้นบรรทัด -->
-<div class="container-fluid text-center text-light">
-    <span class="container col-4 titlelists">
-        Title lists
-    </span>
-</div>
-<br><!-- เว้นบรรทัด -->
-
-<div class="d-flex">
-    <div class="col-3" >
-        <span>
-            <h5 class=" text-center"><u>Popular blogs</u></h5>
-        </span>
-        {% for blogs in popular %}
-        <p class="container">
-            <a href="#" style="text-decoration: none;" class="text-dark">
-                <b>{{ blogs.article_name }} <span class="badge bg-secondary">By {{ blogs.writer }}</span></b>&nbsp;
-            </a>
-            <hr>
+<div class="container-fluid">
+    <br> <!-- เว้นบรรทัด -->
+    <div class="container-fluid text-center ubuntu">
+        <p class="container col-2 titlelists border-bottom border-dark">
+            Titles
         </p>
-        {% endfor %}
     </div>
-    
-    <div class="col-6 container-fluid justify-content-start">
-        {% for blogs in blogs %}
-        <div class="title mb-3 rounded container-fluid" onclick='location.href="detail/{{ blogs.pk }}"'>
-            <p style="font-size: 200%;">
-                <a style="text-decoration: none;" class="text-dark"><b>{{ blogs.article_name }}</b>&nbsp;</a>
-            </p>
-            <div class="d-flex">
-                <span style="font-size: 85%;" class="badge bg-secondary">By {{ blogs.writer }}</span>
-                &nbsp;&nbsp;
-                <div class="">{% bs_icon 'eye' %}{{ blogs.views|intcomma }} views</div>
+    <br> <!-- เว้นบรรทัด -->
+
+    <div class="d-flex justify-content-start">
+        <div class="col-3" >
+            <div class="container mb-3 ubuntu">
+                <h5><u>Popular blogs</u></h5>
             </div>
-            <p><span style="font-size: 95%;" class="text-secondary mb-5">tag :</span></p>
+            {% for blogs in popular %}
+            <p class="container">
+                <a href="#" style="text-decoration: none;" class="text-dark">
+                    <strong class="ubuntu">{{ blogs.article_name }}</strong>
+                    <span>By {{ blogs.writer }}</span>&nbsp;
+                </a>
+                <hr>
+            </p>
+            {% endfor %}
         </div>
-        {% endfor %}
+        
+        <div class="col-6 ms-5">
+            {% for blogs in blogs %}
+            <div class="title mb-3 rounded container-fluid" onclick='location.href="detail/{{ blogs.pk }}"'>
+                <p style="font-size: 175%;">
+                    <a style="text-decoration: none;" class="text-dark ubuntu"><b>{{ blogs.article_name }}</b>&nbsp;</a>
+                </p>
+                <div class="d-flex">
+                    <div class="mb-1 badge bg-secondary border">By {{ blogs.writer }}</div>
+                    &nbsp;&nbsp;&nbsp;
+                    <div class="h6">{% bs_icon 'eye' %}{{ blogs.views|intcomma }} views</div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
     </div>
 </div>
 
