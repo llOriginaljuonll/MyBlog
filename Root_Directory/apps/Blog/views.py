@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .forms import BlogForm
-from .models import Blog
+from .models import Blog, Like
 from django.contrib import messages
 
 def blog_home(request):
@@ -57,4 +57,28 @@ def blog_delete(request, blog_id):
 	blog.delete()
 	messages.success(request, 'Blog has been successfully deleted.')
 	return redirect('/')
+
+def like_post(request):
+	user = request.user
+	if request.methond == 'POST':
+		post_id = request.POST.get('post_id')
+		post_obj = Blog.objects.get(id=post_id)
+
+		if user in post_obj.liked.all():
+			post_obj.liked.remove(user)
+		else:
+			post_obj.liked.add(user)
+
+		like, created = Like.objects.get_or_create(user=user, post_id=post_id)
+
+		if not created:
+			if like.value == 'Like':
+				like.value = 'unlike'
+			else:
+				like.value = 'Like'
+
+		like.save()
+	return redirect('blog:blog_detail')
+
+		
 
