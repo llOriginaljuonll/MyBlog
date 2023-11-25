@@ -39,8 +39,22 @@
             <p>{{ blog.content }}</p>
             <br>
             <h6><span class="badge bg-secondary">By {{ blog.writer }}</span></h6>
+
+            <form action="{% url 'blog:like_post' %}" method="POST" class="ui form">
+                {% csrf_token %}
+                <input type="hidden" name="post_id" value="{{ obj.id }}">
+                {% if user not in blog.like.all %}
+                    <button class="btn btn-primary" type="submit">Like</button>
+                {% else %}
+                    <button class="btn btn-primary" type="submit">Unlike</button>
+                {% endif %}
+            </form>
+    
+            <strong>{{ blog.liked.all.count }} likes</strong>
         </div>
     </div>
+
+      
 
 </div>
 {% endblock content %}
