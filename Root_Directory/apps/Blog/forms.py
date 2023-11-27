@@ -20,15 +20,24 @@ class BlogForm(ModelForm):
 
 		widgets = {
 			'article_name': forms.TextInput(
-				attrs={'placeholder': 'ชื่อบทความ',
-		   			   'style': 'font-size: 20px;',
-		   }
+				attrs={
+					'placeholder': 'ชื่อบทความ',
+		   			'style': 'font-size: 20px;',
+		  		}	
 			),
 			'content': forms.Textarea(
-				attrs={'placeholder': 'เนื้อหาบทความ .....',
-					   'rows': '20',		
-			}
+				attrs={
+					'placeholder': 'เนื้อหาบทความ .....',
+					'rows': '20',
+				}
 			),
+			'writer': forms.TextInput(
+				attrs={
+					'value': '',
+					'id': 'writer',
+					'type': 'hidden'
+				}
+			)
 		}
 
 		labels = {
