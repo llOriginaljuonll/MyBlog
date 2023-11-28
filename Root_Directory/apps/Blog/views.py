@@ -1,12 +1,21 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
+from django.views.generic import DetailView
 from .forms import BlogForm
-from .models import Blog, Like
+from .models import Blog
 from django.contrib import messages
+from django.urls import reverse
+from django.http import HttpResponseRedirect
 
 def blog_home(request):
 	blogs = Blog.objects.all()
 	popular = Blog.objects.all().order_by('-views')[:4]
-	return render(request, 'blog_home.html',{'blogs': blogs, 'popular': popular})
+	views_scores = Blog.objects.values('views')
+	like_scores = Blog.objects.values('likes')
+	populars = views_scores + like_scores
+	populars = Blog.objects.all().order_by(Blog.total_scores)
+	return render(request, 'blog_home.html',{'blogs': blogs, 'populars': populars})
+
+Blog.total_likes(1)
 
 """
 ส่วนที่น่าสนใจของฟังก์ชั่นนี้
@@ -43,6 +52,25 @@ def blog_detail(request, blog_id):
 	blog.save()
 	return render(request, 'blog_detail.html', {'blog': blog})
 
+class BlogLikeView(DetailView):
+	model = Blog
+	template_name = 'blog_detail.html'
+
+	def get_context_data(self, *args, **kwargs):
+		context = super(BlogLikeView, self).get_context_data(*args, **kwargs)
+
+		stuff = get_object_or_404(Blog, id=self.kwargs['pk'])
+		total_likes = stuff.total_likes()
+
+		liked = False
+		if stuff.likes.filter(id=self.request.user.id).exists():
+			liked = True
+
+		context['total_likes'] = total_likes
+		context['liked'] = liked
+		return context
+	
+
 def blog_edit(request, blog_id):
 	blog = Blog.objects.get(pk=blog_id)
 	form = BlogForm(request.POST or None, instance=blog)
@@ -58,27 +86,22 @@ def blog_delete(request, blog_id):
 	messages.success(request, 'Blog has been successfully deleted.')
 	return redirect('/')
 
-def like_post(request):
-	user = request.user
-	if request.methond == 'POST':
-		post_id = request.POST.get('post_id')
-		post_obj = Blog.objects.get(id=post_id)
+def LikeView(request, id):
+	blog = get_object_or_404(Blog, id=request.POST.get('blog_id'))
+	liked = False
 
-		if user in post_obj.liked.all():
-			post_obj.liked.remove(user)
-		else:
-			post_obj.liked.add(user)
+	if blog.likes.filter(id=request.user.id).exists():
+		blog.likes.remove(request.user)
+		liked = False
 
-		like, created = Like.objects.get_or_create(user=user, post_id=post_id)
+	else:
+		blog.likes.add(request.user)
+		liked = True
 
-		if not created:
-			if like.value == 'Like':
-				like.value = 'unlike'
-			else:
-				like.value = 'Like'
+	return HttpResponseRedirect(reverse('blog:blog_like', args=[str(id)]))
 
-		like.save()
-	return redirect('blog:blog_detail')
+
+
 
 		
 
