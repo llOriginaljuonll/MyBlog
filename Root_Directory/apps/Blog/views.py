@@ -9,30 +9,8 @@ from django.http import HttpResponseRedirect
 def blog_home(request):
 	blogs = Blog.objects.all()
 	popular = Blog.objects.all().order_by('-views')[:4]
-	views_scores = Blog.objects.values('views')
-	like_scores = Blog.objects.values('likes')
-	populars = views_scores + like_scores
-	populars = Blog.objects.all().order_by(Blog.total_scores)
-	return render(request, 'blog_home.html',{'blogs': blogs, 'populars': populars})
+	return render(request, 'blog_home.html',{'blogs': blogs, 'popular': popular,})
 
-Blog.total_likes(1)
-
-"""
-ส่วนที่น่าสนใจของฟังก์ชั่นนี้
--> การดึงข้อมูลจาก Default User model.
--> request.user = ชื่อของ user(username)
--> กระบวนการทำงานของฟังก์ชั่น
-  -> ถ้าเป็นการส่งข้อมูลแบบ POST (ดูได้ที่ form ใน template ว่ามีการระบุ method="post" หรือไม่) ให้ทำงานต่อไป
-    -> writer_field จะเท่ากับ request.user(อธิบายไว้แล้วในบรรทัดก่อนหน้านี้)
-	-> ปกติการดึง form จาก forms.py เราต้องทำอยู่แล้ว แต่ครั้งนี้เราให้อยู่บรรทัดล่างเพื่อรับข้อมูลของ request.user เป็นไปได้ที่เรายังไม่รู้ท่าในการแก้ใน forms.py หรือ models.py เลยต้องใช้ท่านี้ก่อน
-	-> มีการสร้างตัวแปร form เก็บข้อมูลของ BlogForm
-	  -> instance=blog เก็บข้อมูลเฉพาะ blog(ยังรู้ข้อมูลไม่แน่ชัด มีเวลาควรศึกษาเพิ่ม)
-	  -> request.POST (ศึกษาเพิ่ม)
-	  -> จนถึงตอนนี้ได้มีการนำข้อมูลของ username ของ default model มารวมกับ BlogForm แล้ว
-	-> ถ้ามีการกรอกข้อมูลถูกต้องให้ทำการบันทึกและ redirect ไปที่หน้า ('/')
-	-> ถ้ามีการกรอกข้อมูลไม่ถูกต้องให้ render ที่หน้าฟอร์มเริ่มใหม่อีกครั้งหนึ่ง
-  -> ถ้าการส่งข้อมูลไม่ใช่แบบ POST (อาจมีการ refresh) ให้ render ที่หน้าฟอร์มเริ่มใหม่อีกครั้งหนึ่ง
-"""
 def article_form(request): 
 	if request.method == 'POST':
 		blog = Blog(writer=request.user)
@@ -88,15 +66,12 @@ def blog_delete(request, blog_id):
 
 def LikeView(request, id):
 	blog = get_object_or_404(Blog, id=request.POST.get('blog_id'))
-	liked = False
 
 	if blog.likes.filter(id=request.user.id).exists():
 		blog.likes.remove(request.user)
-		liked = False
 
 	else:
 		blog.likes.add(request.user)
-		liked = True
 
 	return HttpResponseRedirect(reverse('blog:blog_like', args=[str(id)]))
 
