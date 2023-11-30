@@ -38,27 +38,33 @@
         <div class="container card-body mb-3">
             <p>{{ blog.content }}</p>
             <br>
-            <h6><span class="badge bg-secondary">By {{ blog.writer }}</span></h6>
+            <h6 class="d-flex justify-content-between align-items-center">
+                <span class="badge bg-secondary d-flex align-self-end">
+                    By {{ blog.writer }}
+                </span>
 
-            <form action="{% url 'blog:like_blog' blog.id %}" method="POST">
-                {% csrf_token %}
-
-                {% if user.is_authenticated %}
-                    {% if liked %}
-                        <button type="submit", name="blog_id", value="{{ blog.id }}",  class="btn btn-danger btn-sm">
-                            Unlike
-                        </button>
-
-                    {% else %}
-                        <button type="submit", name="blog_id", value="{{ blog.id }}", class="btn btn-primary btn-sm">
-                            Like
-                        </button>
-
-                    {% endif %}
-                {% endif %}
-
-                 - {{ total_likes }} Likes
-            </form>
+                <span>
+                    <form action="{% url 'blog:like_blog' blog.id %}" method="POST">
+                        {% csrf_token %}
+    
+                        {% if user.is_authenticated %}
+                            {% if liked %}
+                                <button type="submit", name="blog_id", value="{{ blog.id }}",  class="btn btn-danger btn-sm">
+                                    Unlike
+                                </button>
+        
+                            {% else %}
+                                <button type="submit", name="blog_id", value="{{ blog.id }}", class="btn btn-primary btn-sm">
+                                    Like
+                                </button>
+        
+                            {% endif %}
+                        {% endif %}
+        
+                     - {{ total_likes }} Likes
+                    </form>
+                </span>
+            </h6>
         </div>
     </div>
 
