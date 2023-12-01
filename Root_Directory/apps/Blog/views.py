@@ -5,11 +5,13 @@ from .models import Blog
 from django.contrib import messages
 from django.urls import reverse
 from django.http import HttpResponseRedirect
+from django.db.models import Max
 
 def blog_home(request):
 	blogs = Blog.objects.all()
 	popular = Blog.objects.all().order_by('-views')[:4]
-	return render(request, 'blog_home.html',{'blogs': blogs, 'popular': popular,})
+	most_likes = Blog.objects.annotate(like=Max('likes')).order_by('-like')
+	return render(request, 'blog_home.html',{'blogs': blogs, 'popular': popular, 'most_likes': most_likes})
 
 def article_form(request): 
 	if request.method == 'POST':
@@ -28,6 +30,8 @@ def blog_detail(request, blog_id):
 	blog = Blog.objects.get(pk=blog_id)
 	blog.views = blog.views+1
 	blog.save()
+	# views_scores = Blog.objects.filter(id=1).values_list('views', flat=True)[0]
+	# likes_scores = Blog.objects.filter(id=1).values_list('likes', flat=True)[0] * 10
 	return render(request, 'blog_detail.html', {'blog': blog})
 
 class BlogLikeView(DetailView):

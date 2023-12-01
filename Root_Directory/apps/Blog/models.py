@@ -15,7 +15,7 @@ class Blog(models.Model):
 		verbose_name_plural = "ข้อมูลบทความ"
 
 	def __str__(self):
-		return self.article_name
+		return self.article_name + " " + str(self.total_likes())
 	
 	def total_likes(self):
 		return self.likes.count()
