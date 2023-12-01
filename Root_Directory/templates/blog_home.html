@@ -56,6 +56,7 @@
 				<a href="#" style="text-decoration: none;" class="text-dark">
 					<strong class="ubuntu">{{ blog.article_name }}</strong>
 					<span>By {{ blog.writer }}</span>&nbsp;
+					<span>{{ blog.total_likes }} likes</span>&nbsp;
 				</a>
 				<hr>
 			</p>
@@ -72,7 +73,7 @@
                     <div class="mb-1 badge bg-secondary border">By {{ blog.writer }}</div>
                     &nbsp;&nbsp;&nbsp;
                     <div class="h6">{% bs_icon 'eye' %}{{ blog.views|intcomma }} views</div>
-                    <div class="h6">{% bs_icon 'eye' %}{{ blog.total_likes|intcomma }} likes</div>
+                    <div class="h6">&nbsp;&nbsp;&nbsp;{{ blog.total_likes|intcomma }} likes</div>
                 </div>
             </div>
             {% endfor %}
