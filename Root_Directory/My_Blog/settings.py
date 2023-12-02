@@ -46,6 +46,9 @@ INSTALLED_APPS = [
 	"crispy_forms",
 	"crispy_bootstrap5",
     "django_bootstrap_icons",
+
+    # Library
+    'django.contrib.humanize',
 ]
 
 

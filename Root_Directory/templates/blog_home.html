@@ -1,12 +1,15 @@
 {% extends "base.html" %}
 {% load static %}
 {% load crispy_forms_tags %}
+{% load bootstrap_icons %}
+{% load humanize %}
+
 
 {% block title %}BlackSmith Mentality{% endblock title %}
 {% block head %}
 <link rel="stylesheet" href="{% static 'css/fonts.css' %}">
 <style>
-    *{
+    .ubuntu{
         font-family: 'Ubuntu';
     }
     .title{
@@ -14,35 +17,73 @@
         cursor: pointer;
     }
     .titlelists{
-        border-style: double;
-        border-color: #ffffff;
+        
         font-size: 375%;
-        color: #ffffff;
-        background-color: #000000;
     }
 </style>
 {% endblock %}
 
 {% block content %}
+<div class="container-fluid">
+    <br> <!-- เว้นบรรทัด -->
+    <div class="container-fluid text-center ubuntu">
+        <p class="container col-2 titlelists border-bottom border-dark">
+            Titles
+        </p>
+    </div>
+    <br> <!-- เว้นบรรทัด -->
 
-<br><!-- เว้นบรรทัด -->
-<div class="container-fluid text-center text-light">
-    <span class="container col-4 titlelists">
-        Title lists
-    </span>
+    <div class="d-flex justify-content-start">
+        <div class="col-3" >
+            <div class="container mb-3 ubuntu">
+                <h5><u>Most views</u></h5>
+            </div>
+            {% for blogs in popular %}
+            <p class="container">
+                <a href="#" style="text-decoration: none;" class="text-dark">
+                    <strong class="ubuntu">{{ blogs.article_name }}</strong>
+                    <span>By {{ blogs.writer }}</span>&nbsp;
+                </a>
+                <hr>
+            </p>
+            {% endfor %}
+			<br>
+			<div class="container mb-3 ubuntu">
+				<h5><u>Most likes</u></h5>
+			</div>
+			{% for blog in most_likes %}
+			<p class="container">
+				<a href="#" style="text-decoration: none;" class="text-dark">
+					<strong class="ubuntu">{{ blog.article_name }}</strong>
+					<span>By {{ blog.writer }}</span>&nbsp;
+					<span>{{ blog.total_likes }} likes</span>&nbsp;
+				</a>
+				<hr>
+			</p>
+			{% endfor %}
+        </div>
+        
+        <div class="col-6 ms-5">
+            {% for blog in blogs %}
+            <div class="title mb-3 rounded container-fluid" onclick='location.href="detail/{{ blog.pk }}"'>
+                <p style="font-size: 175%;">
+                    <a style="text-decoration: none;" class="text-dark ubuntu"><b>{{ blog.article_name }}</b>&nbsp;</a>
+                </p>
+                <div class="d-flex">
+                    <div class="mb-1 badge bg-secondary border">By {{ blog.writer }}</div>
+                    &nbsp;&nbsp;&nbsp;
+                    <div class="h6">{% bs_icon 'eye' %}{{ blog.views|intcomma }} views</div>
+                    <div class="h6">&nbsp;&nbsp;&nbsp;{{ blog.total_likes|intcomma }} likes</div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="d-flex justify-content-start">
+        
+    
+    </div>
 </div>
-<br><!-- เว้นบรรทัด -->
-
-{% for blogs in blogs %}
-<div class="container-fluid col-6 title mb-3 rounded" onclick='location.href="detail/{{ blogs.pk }}"'>
-	<p style="font-size: 200%;">
-		<a href="#" style="text-decoration: none;" class="text-dark"><b>{{ blogs.article_name }}</b>&nbsp;</a>
-	</p>
-	<span style="font-size: 85%;" class="badge bg-secondary">By {{ request.user }}</span>
-	<br>
-	<p><span style="font-size: 95%;" class="text-secondary mb-5">tag :</span></p>
-</div>
-{% endfor %}
-
 
 {% endblock content %}
