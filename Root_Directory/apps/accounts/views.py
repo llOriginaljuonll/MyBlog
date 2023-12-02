@@ -37,3 +37,6 @@ def sign_up(request):
     return render(request, 'accounts/sign_up.html', {
         'form': form,
     })
+
+def user_info(request):
+    return render(request, 'accounts/user_info.html')
