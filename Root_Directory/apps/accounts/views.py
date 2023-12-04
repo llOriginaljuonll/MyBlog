@@ -21,7 +21,6 @@ def sign_in(request):
     })
 
 def sign_out(request):
-    if request.method == 'POST':
         logout(request)
         return redirect('blog:blog_home')
 
