@@ -24,36 +24,35 @@
 			</a>
 
 			<div class="collapse navbar-collapse" id="navbarSupportedContent" style="font-family: Ubuntu;">
-				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+				<ul class="navbar-nav mb-2 mb-lg-0">
 					<li class="nav-item col-5">
 						<a class="navbar-brand nav-link active text-warning" href="{% url 'blog:blog_home' %}">articles</a>
 					</li>
-
-					{% if user.is_authenticated %}
-					<li class="nav-item col-5">
-						<a class="navbar-brand nav-link active text-warning" href="{% url 'blog:article_form' %}">
-						write<span class="m-auto">{% bs_icon 'pencil-square' %}</span></a>
-					</li>
-					{% endif %}
 				</ul>
 			</div>
 
 			{% if user.is_authenticated %}
 			<div class="col-4" style="font-family: Ubuntu;">
-				<form action="{% url 'accounts:sign_out' %}" method="post">
-					{% csrf_token %}
-					<button class="btn btn-sm btn-outline-danger float-end mt-2" 
-							type="submit">
-						<span><strong>Sign out</strong></span>
-					</button>
-				</form>
-				
-				<!-- ยังไม่ได้ใส่ link คิดว่าเป็นลิ้งค์ที่เชื่อมไปดู profile user -->
-				<ul class="navbar-nav float-end me-1">
-					<li class="nav-item">
-						<a href="#" class="btn btn-sm shadow-none float-end col-10 me-4 text-light">
-							<h3><strong class="text-capitalize text-warning">{{ user.username }} !</strong></h3>
+				<ul class="navbar-nav justify-content-end">
+					<li class="text-info d-flex align-items-center me-2 mt-1">
+						<a href="{% url 'accounts:user_info' %}" class="p-0 fs-5 nav-link text-warning text-capitalize">{{ user.username }} !
 						</a>
+					</li>
+					<li class="d-flex align-items-center justify-content-end ">
+						<a class="navbar-brand nav-link active text-warning m-auto" data-bs-toggle="dropdown">
+						{% bs_icon 'person-down' size='30px' %}</a>
+						<ul class="dropdown-menu-end dropdown-menu">
+							<li>
+								<a href="{% url 'accounts:user_info' %}" class="dropdown-item">Your profile</a>
+							</li>
+							<li>
+								<a href="{% url 'blog:article_form' %}" class="dropdown-item d-flex align-items-end">Write<span class="ms-2">{% bs_icon 'pencil-fill' size='13px '%}</a>
+							</li>
+							<div class="dropdown-divider"></div>
+							<li>
+								<a href="{% url 'accounts:sign_out' %}" class="dropdown-item text-danger">Sign out</a>
+							</li>
+						</ul>
 					</li>
 				</ul>
 				
