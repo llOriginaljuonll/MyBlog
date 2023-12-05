@@ -1,5 +1,8 @@
 from django.shortcuts import render, redirect
 
+# User model
+from django.contrib.auth.models import User
+
 # accounts system
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import login, logout
@@ -37,5 +40,6 @@ def sign_up(request):
         'form': form,
     })
 
-def user_info(request):
-    return render(request, 'accounts/user_info.html')
+def user_info(request, user_id):
+    user_info = User.objects.get(pk=user_id)
+    return render(request, 'accounts/user_info.html', {'user': user_info})

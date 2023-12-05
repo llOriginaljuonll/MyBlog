@@ -5,5 +5,17 @@
 {% block title %}Your information{% endblock title %}
 
 {% block content %}
-<div class="container text-center text-uppercase"><h1><span class="border-bottom border-dark">{{ user.username }} #{{ user.pk}}</span></h1></div>
+<br>
+<div class="container text-center text-uppercase">
+    <h1><span class="border-bottom border-dark">{{ user.username }}</span></h1>
+</div>
+<div class="container d-flex border border-danger">
+    <div class="col-6">Username: {{ user.username }}</div>
+    <div class="col-6">Email: {{ user.last_name }}</div>
+</div>
+<div class="container d-flex border border-danger">
+    <div class="col-4">{{ user.last_login }}</div>
+    <div class="col-4">{{ user.last_name }}</div>
+    <div class="col-4">{{ user.is_staff }}</div>
+</div>
 {% endblock content %}

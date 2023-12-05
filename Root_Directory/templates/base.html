@@ -32,25 +32,27 @@
 			</div>
 
 			{% if user.is_authenticated %}
-			<div class="col-4" style="font-family: Ubuntu;">
-				<ul class="navbar-nav justify-content-end">
-					<li class="text-info d-flex align-items-center me-2 mt-1">
-						<a href="{% url 'accounts:user_info' %}" class="p-0 fs-5 nav-link text-warning text-capitalize">{{ user.username }} !
+			<div class="col-3 d-flex justify-content-end" style="font-family: Ubuntu;">
+				<ul class="navbar-nav col-10 justify-content-around d-flex align-items-end">
+					<li>
+						<a href="accounts/user_info/{{user.pk}}" class="me-2 p-0 fs-5 nav-link text-warning text-uppercase ms-4">{{ user.username }} !
 						</a>
 					</li>
-					<li class="d-flex align-items-center justify-content-end ">
-						<a class="navbar-brand nav-link active text-warning m-auto" data-bs-toggle="dropdown">
-						{% bs_icon 'person-down' size='30px' %}</a>
+					<li class="nav-item dropdown">
+						<a class="navbar-brand nav-link active text-warning m-auto p-0" data-bs-toggle="dropdown">
+						{% bs_icon 'person-lines-fill' size='30px' %}</a>
 						<ul class="dropdown-menu-end dropdown-menu">
 							<li>
-								<a href="{% url 'accounts:user_info' %}" class="dropdown-item">Your profile</a>
+								<a href="accounts/user_info/{{user.pk}}" class="dropdown-item"><span class="mb-2">{% bs_icon 'person' size='20px' %}</span>Your profile</a>
 							</li>
 							<li>
-								<a href="{% url 'blog:article_form' %}" class="dropdown-item d-flex align-items-end">Write<span class="ms-2">{% bs_icon 'pencil-fill' size='13px '%}</a>
+								<a href="{% url 'blog:article_form' %}" class="dropdown-item d-flex align-items-end">
+									<span class="me-2 mb-1">{% bs_icon 'pencil' size='17px' %}</span>Write
+								</a>
 							</li>
 							<div class="dropdown-divider"></div>
 							<li>
-								<a href="{% url 'accounts:sign_out' %}" class="dropdown-item text-danger">Sign out</a>
+								<a href="{% url 'accounts:sign_out' %}" class="dropdown-item text-danger d-flex align-items-end"> <span class="me-2 m-0">{% bs_icon 'box-arrow-right' size='20px' %}</span>Sign out</a>
 							</li>
 						</ul>
 					</li>
@@ -59,7 +61,6 @@
 			</div>
 			{% else %}
 			<div class="col-4" style="font-family: Ubuntu;">
-				<!-- ยังไม่ได้ใส่ link -->
 				<a href="{% url 'accounts:sign_up' %}" class="btn btn-sm btn-outline-light float-end">
 					<b>Sign up</b>
 				</a>

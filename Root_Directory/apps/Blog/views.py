@@ -30,8 +30,6 @@ def blog_detail(request, blog_id):
 	blog = Blog.objects.get(pk=blog_id)
 	blog.views = blog.views+1
 	blog.save()
-	# views_scores = Blog.objects.filter(id=1).values_list('views', flat=True)[0]
-	# likes_scores = Blog.objects.filter(id=1).values_list('likes', flat=True)[0] * 10
 	return render(request, 'blog_detail.html', {'blog': blog})
 
 class BlogLikeView(DetailView):
