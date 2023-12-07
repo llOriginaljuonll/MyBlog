@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 
 # User model
-from django.contrib.auth.models import User
+from .models import CustomUser
 
 # accounts system
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
@@ -41,5 +41,6 @@ def sign_up(request):
     })
 
 def user_info(request, user_id):
-    user_info = User.objects.get(pk=user_id)
-    return render(request, 'accounts/user_info.html', {'user': user_info})
+    user_info = CustomUser.objects.get(pk=user_id)
+    context = {'client': user_info}
+    return render(request, 'accounts/user_info.html', context)
