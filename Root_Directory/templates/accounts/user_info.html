@@ -5,17 +5,42 @@
 {% block title %}Your information{% endblock title %}
 
 {% block content %}
-<br>
-<div class="container text-center text-uppercase">
-    <h1><span class="border-bottom border-dark">{{ user.username }}</span></h1>
-</div>
-<div class="container d-flex border border-danger">
-    <div class="col-6">Username: {{ user.username }}</div>
-    <div class="col-6">Email: {{ user.last_name }}</div>
-</div>
-<div class="container d-flex border border-danger">
-    <div class="col-4">{{ user.last_login }}</div>
-    <div class="col-4">{{ user.last_name }}</div>
-    <div class="col-4">{{ user.is_staff }}</div>
+<div class="container-fluid">
+    <div class="d-flex">
+        <div class="col-4 text-secondary">
+            <br>
+            <div class="d-flex justify-content-center">
+                <img src="/kenny-kennethh-p1ACSxNQuEE-unsplash.jpg" width="200px" height="150px" class="rounded-circle border border-dark mb-3">
+            </div>
+            <h1>&ensp;<span class="border-bottom">Profile</span></h1>
+            <div class="row">
+                <div class="col-4 row">
+                    <label class="fw-bold">First name :</label>
+                </div>
+                <div class="col-8 me-1 row">{{ client.username }}</div>
+            </div>
+            <div class="row">
+                <div class="col-4 row">
+                    <label class="fw-bold">Last name :</label>
+                </div>
+                <div class="col-8 me-1 row">{{ client.last_name }}</div>
+            </div>
+            <div class="row">
+                <div class="col-4 row">
+                    <label class="fw-bold">Email :</label>
+                </div>
+                <div class="col-8 me-1 row">{{ client.email }}</div>
+            </div>
+            <div class="row">
+                <div class="col-4 row">
+                    <label class="fw-bold">Last login :</label>
+                </div>
+                <div class="col-8 me-1 row">{{ client.last_login|date:"d F Y" }}</div>
+            </div><hr>
+        </div>
+        <div class="col-8 text-secondary">
+            <h1 class="container"><span class="border-bottom">Library</span></h1>
+        </div>
+    </div>
 </div>
 {% endblock content %}
