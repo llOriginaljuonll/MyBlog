@@ -42,12 +42,7 @@
                 <span class="badge bg-secondary d-flex align-self-end">
                     By {{ blog.writer }}
                 </span>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                    <label class="form-check-label" for="flexCheckDefault">
-                      Bookmark
-                    </label>
-                  </div>
+				<a href="{% url 'accounts:favourite_add' blog.id %}" class="btn btn-outline-primary">Bookmark</a>
 
                 <span>
                     <form action="{% url 'blog:like_blog' blog.id %}" method="POST">
