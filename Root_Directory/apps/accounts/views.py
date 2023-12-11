@@ -44,3 +44,7 @@ def user_info(request, user_id):
     user_info = CustomUser.objects.get(pk=user_id)
     context = {'client': user_info}
     return render(request, 'accounts/user_info.html', context)
+
+def user_age(request):
+    current_time = User.username
+    return render(request, 'accounts/user_info.html', {'now': current_time})

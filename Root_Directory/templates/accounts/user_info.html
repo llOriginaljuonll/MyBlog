@@ -10,26 +10,32 @@
         <div class="col-4 text-secondary">
             <br>
             <div class="d-flex justify-content-center">
-                <img src="{{ client.profile_img.url }}" width="200px" height="150px" class="rounded-circle mb-3">
+                <img src="{{client.profile_img.url}}" width="200px" height="150px" class="rounded-circle mb-3">
             </div>
             <h1>&ensp;<span class="border-bottom">Profile</span></h1>
             <div class="row">
                 <div class="col-4 row">
                     <label class="fw-bold">First name :</label>
                 </div>
-                <div class="col-8 row">{{ client.username }}</div>
+                <div class="col-8 row">{{client.username}}</div>
             </div>
             <div class="row">
                 <div class="col-4 row">
                     <label class="fw-bold">Last name :</label>
                 </div>
-                <div class="col-8 row">{{ client.last_name }}</div>
+                <div class="col-8 row">{{client.last_name}}</div>
+            </div>
+            <div class="row">
+                <div class="col-4 row">
+                    <label class="fw-bold">Last name :</label>
+                </div>
+                <div class="col-8 row">{{now}}</div>
             </div>
             <div class="row">
                 <div class="col-4 row">
                     <label class="fw-bold">Email :</label>
                 </div>
-                <div class="col-8 row">{{ client.email }}</div>
+                <div class="col-8 row">{{client.email}}</div>
             </div>
             <div class="row">
                 <div class="col-4 row">
@@ -46,6 +52,14 @@
         </div>
         <div class="col-8 text-secondary">
             <h1 class="container"><span class="border-bottom">Library</span></h1>
+            {% for  in is_bookmark %}
+              
+            {% endfor %}
+            {% if is_bookmark %}
+                <ul>
+                    <li></li>
+                </ul>
+            {% endif %}
         </div>
     </div>
 </div>

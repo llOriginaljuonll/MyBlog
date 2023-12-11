@@ -42,6 +42,12 @@
                 <span class="badge bg-secondary d-flex align-self-end">
                     By {{ blog.writer }}
                 </span>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault">
+                      Bookmark
+                    </label>
+                  </div>
 
                 <span>
                     <form action="{% url 'blog:like_blog' blog.id %}" method="POST">
