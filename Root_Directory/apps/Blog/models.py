@@ -10,6 +10,7 @@ class Blog(models.Model):
 	writer = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,)
 	views = models.IntegerField(default=0)
 	likes = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='blog_posts')
+	bookmark_article = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='favourite', default=None, blank=None)
 
 	class Meta:
 		verbose_name = "ข้อมูลบทความ"
