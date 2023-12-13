@@ -3,6 +3,11 @@ from django.contrib.auth.models import User
 from django.conf import settings
 
 class Blog(models.Model):
+
+	class NewManager(models.Manager):
+		def get_queryset(self):
+			return super().get_queryset().filter(id = '1')
+
 	id: int
 	article_name = models.CharField(max_length=255)
 	content = models.TextField()

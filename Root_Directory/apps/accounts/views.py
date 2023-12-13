@@ -54,12 +54,12 @@ def user_info(request, user_id):
 
 def favourite_add(request, id):
     post = get_object_or_404(Blog, id=id)
-    if Blog.bookmark_article.filter(id=request.user.id).exists():
-        Blog.bookmark_article.remove(request.user)
+    if post.bookmark_article.filter(id=request.user.id).exists():
+        post.bookmark_article.remove(request.user)
     else:
-        Blog.bookmark_article.add(request.user)
+        post.bookmark_article.add(request.user)
     return HttpResponseRedirect(request.META['HTTP_REFERER'])
 
 def bookmark_list(request):
-    new = Blog.objects.get(bookmark_article=request.user)
+    new = Blog.objects.filter(bookmark_article=request.user)
     return render(request, 'accounts/bookmark.html', {'new': new})
