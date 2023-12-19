@@ -6,6 +6,8 @@ from django.contrib import messages
 from django.urls import reverse
 from django.http import HttpResponseRedirect
 from django.db.models import Count
+from dateutil.relativedelta import relativedelta
+from datetime import date
 
 def blog_home(request):
 	blogs = Blog.objects.all()
@@ -50,6 +52,11 @@ class BlogLikeView(DetailView):
 		context['liked'] = liked
 		return context
 	
+def calculate_age(request):
+	today = date.today()
+	birth_date = request.user.birthday
+	age = relativedelta(today, birth_date)
+	return age.year
 
 def blog_edit(request, blog_id):
 	blog = Blog.objects.get(pk=blog_id)
