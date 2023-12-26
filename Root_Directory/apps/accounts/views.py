@@ -46,7 +46,8 @@ def sign_up(request):
 
 def user_info(request, user_id):
     user_info = CustomUser.objects.get(pk=user_id)
-    context = {'client': user_info}
+    bookmarked_blog = Blog.newmanager.filter(bookmark_article=request.user.id)
+    context = {'client': user_info, 'bookmarked': bookmarked_blog}
     return render(request, 'accounts/user_info.html', context)
 
 def user_age(request, ):
@@ -56,13 +57,9 @@ def user_age(request, ):
 def favourite_add(request, id):
     post = get_object_or_404(Blog, id=id)
     if post.bookmark_article.filter(id=request.user.id).exists():
-        post.bookmark_article.remove(request.user)
+        post.bookmark_article.remove(request.user.id)
     else:
-        post.bookmark_article.add(request.user)
+        post.bookmark_article.add(request.user.id)
         
-    return (request, 'accounts/bookmark.html')
-    # return HttpResponseRedirect(request.META['HTTP_REFERER'])
-
-def bookmark_list(request):
-    new = Blog.newmanager.filter(bookmark_article=request.user)
-    return render(request, 'accounts/bookmark.html', {'new': new})
+    # return render(request, 'accounts/bookmark.html')
+    return HttpResponseRedirect(request.META['HTTP_REFERER'])
