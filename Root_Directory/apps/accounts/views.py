@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http.response import HttpResponseRedirect
+from datetime import date
 
 # User model
 from .models import CustomUser
@@ -48,9 +49,9 @@ def user_info(request, user_id):
     context = {'client': user_info}
     return render(request, 'accounts/user_info.html', context)
 
-# def user_age(request):
-#     current_time = User.username
-#     return render(request, 'accounts/user_info.html', {'now': current_time})
+def user_age(request, ):
+    
+    return render(request, 'accounts/user_info.html', {'user_info': user_info})
 
 def favourite_add(request, id):
     post = get_object_or_404(Blog, id=id)
@@ -58,8 +59,10 @@ def favourite_add(request, id):
         post.bookmark_article.remove(request.user)
     else:
         post.bookmark_article.add(request.user)
-    return HttpResponseRedirect(request.META['HTTP_REFERER'])
+        
+    return (request, 'accounts/bookmark.html')
+    # return HttpResponseRedirect(request.META['HTTP_REFERER'])
 
 def bookmark_list(request):
-    new = Blog.objects.filter(bookmark_article=request.user)
+    new = Blog.newmanager.filter(bookmark_article=request.user)
     return render(request, 'accounts/bookmark.html', {'new': new})
