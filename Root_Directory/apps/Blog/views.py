@@ -4,7 +4,7 @@ from .forms import BlogForm
 from .models import Blog
 from django.contrib import messages
 from django.urls import reverse
-from django.http import HttpResponseRedirect
+from django.http import HttpResponse
 from django.db.models import Count
 from dateutil.relativedelta import relativedelta
 from datetime import date
@@ -82,7 +82,7 @@ def LikeView(request, id):
 	else:
 		blog.likes.add(request.user)
 
-	return HttpResponseRedirect(reverse('blog:blog_like', args=[str(id)]))
+	return HttpResponse(reverse('blog:blog_like', args=[str(id)]))
 
 
 

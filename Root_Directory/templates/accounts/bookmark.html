@@ -24,5 +24,7 @@
 {% endblock %}
 
 {% block content %}
-    <h1>{{new.id}}</h1>
+    {% for blog in new %}
+        {{ blog.article_name }}
+    {% endfor %}
 {% endblock %}
