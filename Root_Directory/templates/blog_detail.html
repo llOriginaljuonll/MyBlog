@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% load crispy_forms_tags %}
-
+{% load bootstrap_icons %}
 
 {% block title %}{{ blog.article_name }}{% endblock title %}
 
@@ -23,9 +23,14 @@
 
     <div class="container card border border-secondary">
         <div class="container card-body">
-            <h1>
-                <span class="border-bottom border-dark">
+            <h3>
+                <span class="border-bottom border-dark text-center">
                     {{ blog.article_name }}
+                </span>
+                <span class="ms-1">
+                    <a href="{% url 'accounts:favourite_add' blog.id %}" class="text-secondary">
+                        {% bs_icon 'bookmark-plus' size='20px' %}
+                    </a>
                 </span>
                 <a href="/delete/{{ blog.id }}" onclick="return confirm('Do you sure to delete this article?')">
                     <button class="btn btn-danger float-end mt-2 ms-2">
@@ -33,16 +38,15 @@
                     </button>
                 </a>
                 <button class="btn btn-dark float-end mt-2"><a href="/edit/{{ blog.pk }}" class="text-light">Edit article</a></button>
-            </h1>
+            </h3>
         </div>
-        <div class="container card-body mb-3">
+        <div class="container card-body mb-1 p-0">
             <p>{{ blog.content }}</p>
             <br>
             <h6 class="d-flex justify-content-between align-items-center">
                 <span class="badge bg-secondary d-flex align-self-end">
                     By {{ blog.writer }}
                 </span>
-				<a href="{% url 'accounts:favourite_add' blog.id %}" class="btn btn-outline-primary">Bookmark</a>
 
                 <span>
                     <form action="{% url 'blog:like_blog' blog.id %}" method="POST">

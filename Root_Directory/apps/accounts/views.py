@@ -56,6 +56,7 @@ def user_age(request, ):
 
 def favourite_add(request, id):
     post = get_object_or_404(Blog, id=id)
+
     if post.bookmark_article.filter(id=request.user.id).exists():
         post.bookmark_article.remove(request.user.id)
     else:
