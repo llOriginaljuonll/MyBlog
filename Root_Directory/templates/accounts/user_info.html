@@ -27,10 +27,10 @@
                 <div class="col-8 row">{{client.last_name}}</div>
             </div>
             <div class="row">
-                <div class="col-3 row border">
+                <div class="col-4 row">
                     <label class="fw-bold">age :</label>
                 </div>
-                <div class="col-8 row">{{now}}</div>
+                <div class="col-8 row">{{ user_age }}</div>
             </div>
             <div class="row">
                 <div class="col-4 row">
@@ -55,7 +55,7 @@
             <h1 class="container"><span class="border-bottom">Library</span></h1><br>
 			{% for bookmarked in bookmarked %}
 				<h4><a href="#writer">{{ bookmarked.writer }}</a></h4>
-				<h2><a href="/detail/{{ bookmarked.pk }}">{{ bookmarked.article_name }}</a> <span class="float-end"><a href="{% url 'accounts:favourite_add' bookmarked.id %}">{% bs_icon 'bookmark-fill' %}</a></span></h2> <hr><br>
+				<h2><a href="/detail/{{ bookmarked.pk }}">{{ bookmarked.article_name }}</a> <span class="float-end"><a href="{% url 'accounts:favourite_add' bookmarked.id %}" class="text-secondary">{% bs_icon 'bookmark-star-fill' size='20px' %}</a></span></h2> <hr><br>
 			{% endfor %}
         </div>
     </div>
