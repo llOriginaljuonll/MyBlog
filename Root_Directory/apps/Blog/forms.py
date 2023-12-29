@@ -1,6 +1,7 @@
 from django import forms
 from django.forms import ModelForm
 from .models import Blog
+from ckeditor.fields import RichTextField
 
 """
 1.ชื่อไฟล์ forms.py ที่จริงเป็นชื่ออื่นก็ได้(แต่ต้องลงท้าย ".py") สิ่งสำคัญคือต้องมีการเขียน from django import forms เข้ามาถึงจะใช้งาน django form ได้
@@ -25,12 +26,7 @@ class BlogForm(ModelForm):
 		   			'style': 'font-size: 20px;',
 		  		}	
 			),
-			'content': forms.Textarea(
-				attrs={
-					'placeholder': 'เนื้อหาบทความ .....',
-					'rows': '20',
-				}
-			),
+			'content': RichTextField(),
 			'writer': forms.TextInput(
 				attrs={
 					'value': '',

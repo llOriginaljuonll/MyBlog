@@ -46,6 +46,7 @@ INSTALLED_APPS = [
 	"crispy_forms",
 	"crispy_bootstrap5",
     "django_bootstrap_icons",
+	"ckeditor",
 
     # Library
     'django.contrib.humanize',
@@ -148,3 +149,9 @@ CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap5'
 CRISPY_TEMPLATE_PACK = 'bootstrap5'
 
 AUTH_USER_MODEL = 'accounts.CustomUser'
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'height': '550', 
+    },
+}
