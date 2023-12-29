@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% load bootstrap_icons %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block title %}Your information{% endblock title %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="d-flex">
+        <div class="col-4 text-secondary">
+            <br>
+            <div class="d-flex justify-content-center">
+                <img src="{{ client.profile_img.url }}" width="200px" height="150px" class="rounded-circle mb-3">
+            </div>
+            <h1>&ensp;<span class="border-bottom">Profile</span></h1>
+            <div class="row">
+                <div class="col-4 row">
+                    <label class="fw-bold">First name :</label>
+                </div>
+                <div class="col-8 row">{{client.username}}</div>
+            </div>
+            <div class="row">
+                <div class="col-4 row">
+                    <label class="fw-bold">Last name :</label>
+                </div>
+                <div class="col-8 row">{{client.last_name}}</div>
+            </div>
+            <div class="row">
+                <div class="col-4 row">
+                    <label class="fw-bold">age :</label>
+                </div>
+                <div class="col-8 row">{{ user_age }}</div>
+            </div>
+            <div class="row">
+                <div class="col-4 row">
+                    <label class="fw-bold">Email :</label>
+                </div>
+                <div class="col-8 row">{{client.email}}</div>
+            </div>
+            <div class="row">
+                <div class="col-4 row">
+                    <label class="fw-bold">Birthday :</label>
+                </div>
+                <div class="col-8 row">{{ client.birthday|date:"j F Y" }}</div>
+            </div>
+            <div class="row">
+                <div class="col-4 row">
+                    <label class="fw-bold">Last login :</label>
+                </div>
+                <div class="col-8 row">{{ client.last_login|date:"j F Y" }}</div>
+            </div><hr>
+        </div>
+        <div class="col-5 text-secondary">
+            <h1 class="container"><span class="border-bottom">Library</span></h1><br>
+			{% for bookmarked in bookmarked %}
+				<h4><a href="#writer">{{ bookmarked.writer }}</a></h4>
+				<h2><a href="/detail/{{ bookmarked.pk }}">{{ bookmarked.article_name }}</a> <span class="float-end"><a href="{% url 'accounts:favourite_add' bookmarked.id %}" class="text-secondary">{% bs_icon 'bookmark-star-fill' size='20px' %}</a></span></h2> <hr><br>
+			{% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock content %}

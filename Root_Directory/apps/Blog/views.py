@@ -4,8 +4,10 @@ from .forms import BlogForm
 from .models import Blog
 from django.contrib import messages
 from django.urls import reverse
-from django.http import HttpResponseRedirect
+from django.http import HttpResponse
 from django.db.models import Count
+from dateutil.relativedelta import relativedelta
+from datetime import date
 
 def blog_home(request):
 	blogs = Blog.objects.all()
@@ -30,8 +32,6 @@ def blog_detail(request, blog_id):
 	blog = Blog.objects.get(pk=blog_id)
 	blog.views = blog.views+1
 	blog.save()
-	# views_scores = Blog.objects.filter(id=1).values_list('views', flat=True)[0]
-	# likes_scores = Blog.objects.filter(id=1).values_list('likes', flat=True)[0] * 10
 	return render(request, 'blog_detail.html', {'blog': blog})
 
 class BlogLikeView(DetailView):
@@ -52,6 +52,11 @@ class BlogLikeView(DetailView):
 		context['liked'] = liked
 		return context
 	
+def calculate_age(request):
+	today = date.today()
+	birth_date = request.user.birthday
+	age = relativedelta(today, birth_date)
+	return age.year
 
 def blog_edit(request, blog_id):
 	blog = Blog.objects.get(pk=blog_id)
@@ -77,7 +82,7 @@ def LikeView(request, id):
 	else:
 		blog.likes.add(request.user)
 
-	return HttpResponseRedirect(reverse('blog:blog_like', args=[str(id)]))
+	return HttpResponse(reverse('blog:blog_like', args=[str(id)]))
 
 
 
