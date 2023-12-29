@@ -47,7 +47,8 @@
                 <span class="badge bg-secondary d-flex align-self-end">
                     By {{ blog.writer }}
                 </span>
-
+				
+				{% comment %} Like button {% endcomment %}
                 <span>
                     <form action="{% url 'blog:like_blog' blog.id %}" method="POST">
                         {% csrf_token %}

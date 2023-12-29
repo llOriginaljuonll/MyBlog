@@ -24,7 +24,7 @@
 				{% csrf_token %}
 				<br> <!-- เว้นบรรทัด -->
 
-				<div class="container">
+				<div class="container blog-form">
 					{{ form.media }}
 					{{ form.article_name|as_crispy_field }}
 					{{ form.content|as_crispy_field }}
