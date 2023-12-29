@@ -7,6 +7,7 @@
 
 {% block head %}
 <link rel="stylesheet" href="{% static 'css/fonts.css' %}">
+<link rel="stylesheet" href="{% static 'css/custom.css' %}">
 {% endblock %}
 
 {% block content %}
@@ -24,6 +25,7 @@
 				<br> <!-- เว้นบรรทัด -->
 
 				<div class="container">
+					{{ form.media }}
 					{{ form.article_name|as_crispy_field }}
 					{{ form.content|as_crispy_field }}
 					{{ form.writer|as_crispy_field }}
