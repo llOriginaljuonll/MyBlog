@@ -1,5 +1,6 @@
 from django.db import models
 from django.conf import settings
+from ckeditor.fields import RichTextField
 
 class Blog(models.Model):
 
@@ -9,7 +10,7 @@ class Blog(models.Model):
 
 	id: int
 	article_name = models.CharField(max_length=255)
-	content = models.TextField()
+	content = RichTextField(blank=True, null=True)
 	created = models.DateTimeField(auto_now_add=True)
 	writer = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,)
 	views = models.IntegerField(default=0)
