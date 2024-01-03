@@ -6,21 +6,23 @@
 {% block title %}{{ blog.article_name }}{% endblock title %}
 
 {% block head %}
-<link rel="stylesheet" href="{% static 'css/fonts.css' %}">
-<style>
-    button{
-        font-family: Ubuntu;
-    }
-    a{
-        text-decoration: none;
-    }
-</style>
+
+    <link rel="stylesheet" href="{% static 'css/fonts.css' %}">
+    <style>
+        button{
+            font-family: Ubuntu;
+        }
+
+        a{
+            text-decoration: none;
+        }
+    </style>
+
 {% endblock %}
 
 {% block content %}
-<div class="container-fluid">
-<br><!-- เว้นบรรทัด -->
 
+<div class="container-fluid"> <br>
     <div class="container card border border-secondary">
         <div class="container card-body">
             <h3>
@@ -32,12 +34,22 @@
                         {% bs_icon 'bookmark-plus' size='20px' %}
                     </a>
                 </span>
-                <a href="/delete/{{ blog.id }}" onclick="return confirm('Do you sure to delete this article?')">
-                    <button class="btn btn-danger float-end mt-2 ms-2">
-                        Delete
+
+                {% if user.id == blog.writer.id %}
+
+                    <a href="/delete/{{ blog.id }}" onclick="return confirm('Do you sure to delete this article?')">
+                        <button class="btn btn-danger float-end mt-2 ms-2">
+                            Delete
+                        </button>
+                    </a>
+                    <button class="btn btn-dark float-end mt-2">
+                        <a href="/edit/{{ blog.pk }}" class="text-light">
+                            Edit article
+                        </a>
                     </button>
-                </a>
-                <button class="btn btn-dark float-end mt-2"><a href="/edit/{{ blog.pk }}" class="text-light">Edit article</a></button>
+
+                {% endif %}
+                
             </h3>
         </div>
         <div class="container card-body mb-1 p-0">
@@ -73,8 +85,5 @@
             </h6>
         </div>
     </div>
-
-      
-
 </div>
 {% endblock content %}
