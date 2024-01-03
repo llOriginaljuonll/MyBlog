@@ -65,7 +65,7 @@ def blog_edit(request, blog_id):
 	if form.is_valid():
 		form.save()
 		return redirect('/')
-	return render(request, 'blog_edit.html', {'form': form})
+	return render(request, 'blog_edit.html', {'form': form, 'blog': blog})
 
 def blog_delete(request, blog_id):
 	blog = Blog.objects.get(pk=blog_id)
