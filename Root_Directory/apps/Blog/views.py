@@ -1,13 +1,15 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.views.generic import DetailView
-from .forms import BlogForm
-from .models import Blog
-from django.contrib import messages
 from django.urls import reverse
 from django.http import HttpResponse
+
+from .forms import BlogForm
+from .models import Blog
+
+from django.views.generic import DetailView
+from django.contrib import messages
 from django.db.models import Count
-from dateutil.relativedelta import relativedelta
-from datetime import date
+from django.contrib.auth.decorators import login_required
+
 
 def blog_home(request):
 	blogs = Blog.objects.all()
@@ -15,6 +17,7 @@ def blog_home(request):
 	most_likes = Blog.objects.annotate(like=Count('likes')).order_by('-like')[:5]
 	return render(request, 'blog_home.html',{'blogs': blogs, 'popular': popular, 'most_likes': most_likes})
 
+@login_required(login_url='/')
 def article_form(request): 
 	if request.method == 'POST':
 		blog = Blog(writer=request.user)
@@ -51,13 +54,8 @@ class BlogLikeView(DetailView):
 		context['total_likes'] = total_likes
 		context['liked'] = liked
 		return context
-	
-def calculate_age(request):
-	today = date.today()
-	birth_date = request.user.birthday
-	age = relativedelta(today, birth_date)
-	return age.year
 
+@login_required(login_url='/')
 def blog_edit(request, blog_id):
 	blog = Blog.objects.get(pk=blog_id)
 	form = BlogForm(request.POST or None, instance=blog)
@@ -67,6 +65,7 @@ def blog_edit(request, blog_id):
 		return redirect('/')
 	return render(request, 'blog_edit.html', {'form': form, 'blog': blog})
 
+@login_required(login_url='/')
 def blog_delete(request, blog_id):
 	blog = Blog.objects.get(pk=blog_id)
 	blog.delete()
