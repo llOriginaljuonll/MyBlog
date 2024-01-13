@@ -1,6 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http.response import HttpResponseRedirect
 
+# Python
+from datetime import date
+
 # User model
 from .models import CustomUser
 from .forms import CustomUserCreationForm
@@ -48,7 +51,8 @@ def sign_up(request):
 def user_info(request, user_id):
     user_info = CustomUser.objects.get(pk=user_id)
     bookmarked_blog = Blog.newmanager.filter(bookmark_article=request.user.id)
-    user_age = user_info.last_login.year - user_info.birth_date.year
+        today = date.today()
+        user_age = today.year - user_info.birth_date.year - ((today.month, today.day) < (user_info.birth_date.month, user_info.birth_date.day))
     
     context = {'client': user_info, 'bookmarked': bookmarked_blog, 'user_age': user_age}
     return render(request, 'accounts/user_info.html', context)
