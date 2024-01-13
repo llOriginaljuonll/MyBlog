@@ -51,6 +51,10 @@ def sign_up(request):
 def user_info(request, user_id):
     user_info = CustomUser.objects.get(pk=user_id)
     bookmarked_blog = Blog.newmanager.filter(bookmark_article=request.user.id)
+
+    user_age = None
+
+    if user_info.birth_date:
         today = date.today()
         user_age = today.year - user_info.birth_date.year - ((today.month, today.day) < (user_info.birth_date.month, user_info.birth_date.day))
     

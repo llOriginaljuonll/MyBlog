@@ -30,7 +30,12 @@
                 <div class="col-4 row">
                     <label class="fw-bold">age :</label>
                 </div>
-                <div class="col-8 row">{{ user_age }}</div>
+                {% if user_age is not None %}
+                    <div class="col-8 row">{{ user_age }} year</div>
+                {% else %}
+                    -
+                {% endif %}
+                
             </div>
             <div class="row">
                 <div class="col-4 row">
