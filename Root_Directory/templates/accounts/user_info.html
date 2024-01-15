@@ -30,7 +30,12 @@
                 <div class="col-4 row">
                     <label class="fw-bold">age :</label>
                 </div>
-                <div class="col-8 row">{{ user_age }}</div>
+                {% if user_age is not None %}
+                    <div class="col-8 row">{{ user_age }} year</div>
+                {% else %}
+                    -
+                {% endif %}
+                
             </div>
             <div class="row">
                 <div class="col-4 row">
@@ -40,9 +45,9 @@
             </div>
             <div class="row">
                 <div class="col-4 row">
-                    <label class="fw-bold">Birthday :</label>
+                    <label class="fw-bold">Birthdate :</label>
                 </div>
-                <div class="col-8 row">{{ client.birthday|date:"j F Y" }}</div>
+                <div class="col-8 row">{{ client.birth_date|date:"j F Y" }}</div>
             </div>
             <div class="row">
                 <div class="col-4 row">
