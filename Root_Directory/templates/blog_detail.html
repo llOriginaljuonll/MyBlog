@@ -84,9 +84,26 @@
                 </span>
             </h6>
         </div>
-        <div class="container card-body mb-1 p-0">
-			Comments
-		</div>
+    </div> <br>
+
+    <div class="container">
+
+        <h2>Comment</h2> <br>
+
+        {% if not blog.comments.all %}
+            No Comments Yet
+            <a href="{% url 'blog:add_comment' blog.pk %}">Add one</a> <br><br>
+        {% else %}
+            <a href="{% url 'blog:add_comment' blog.pk %}">Add Comment</a> <br><br>
+            {% for comment in blog.comments.all  %}
+                <strong>
+                    {{ comment.name }} - 
+                    {{ comment.date_added }}
+                </strong> <br>
+                {{ comment.body }}
+            {% endfor %}
+        {% endif %}
+        <a href="{% url 'blog:add_comment' blog.pk %}">Add Comment</a> <br><br>
     </div>
 </div>
 {% endblock content %}
