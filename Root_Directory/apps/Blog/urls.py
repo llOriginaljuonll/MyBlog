@@ -9,4 +9,5 @@ urlpatterns = [
     path('delete/<int:blog_id>', views.blog_delete, name='blog_delete'),
     path('blog_like/<int:pk>', views.BlogLikeView.as_view(), name='blog_like'),
     path('like/<int:id>', views.LikeView, name='like_blog'),
+    path('article/<int:pk>/comment/', views.AddCommentView.as_view(), name='add_comment'),
 ]

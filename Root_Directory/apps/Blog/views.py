@@ -3,9 +3,9 @@ from django.urls import reverse
 from django.http import HttpResponse
 
 from .forms import BlogForm
-from .models import Blog
+from .models import Blog, Comment
 
-from django.views.generic import DetailView
+from django.views.generic import DetailView, CreateView
 from django.contrib import messages
 from django.db.models import Count
 from django.contrib.auth.decorators import login_required
@@ -84,7 +84,10 @@ def LikeView(request, id):
 	return HttpResponse(reverse('blog:blog_like', args=[str(id)]))
 
 
-
+class AddCommentView(CreateView):
+	model = Comment
+	template_name = 'add_comment.html'
+	fields = '__all__'
 
 		
 
