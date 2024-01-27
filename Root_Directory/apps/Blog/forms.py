@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import ModelForm
-from .models import Blog
+from .models import Blog, Comment
 from ckeditor.fields import RichTextField
 
 """
@@ -39,6 +39,19 @@ class BlogForm(ModelForm):
 		labels = {
 			'article_name': '',
 			'content': '',
+		}
+
+class CommentForm(ModelForm):
+
+	class Meta:
+
+		model = Comment
+
+		fields = ('name', 'content')
+
+		widgets = {
+			'name': forms.TextInput(),
+			'content': forms.Textarea(),
 		}
 
 
