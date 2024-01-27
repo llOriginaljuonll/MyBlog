@@ -85,5 +85,25 @@
             </h6>
         </div>
     </div>
+    <div class="col-md-12">
+        {% with comments.count as total_comments %}
+            <h2>
+                {{ total_comments }} comment{{ total_comments|pluralize }}
+            </h2>
+        {% endwith %}
+        {% for comment in comments %}
+            comment {{ forloop.counter }} by {{ comment.name }}
+            on {{ comment.publisth }} {{ comment.content|linebreaks }}
+        {% empty %}
+            <p>There are no comments for this post.</p>
+        {% endfor %}
+        <h2>Make a new comment</h2>
+
+        <form id="myForm" method="post">
+            {% csrf_token %}
+            {{ comment_form|crispy }}
+            <button class="btn btn-primary btn-lg bth-block">Submit</button>
+        </form>
+    </div>
 </div>
 {% endblock content %}
