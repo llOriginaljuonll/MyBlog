@@ -29,3 +29,13 @@ class Blog(models.Model):
 	def total_likes(self):
 		return self.likes.count()
 	
+class Comment(models.Model):
+
+	blog = models.ForeignKey(Blog, on_delete=models.CASCADE, related_name='comments')
+	name = models.CharField(max_length=255)
+	content = models.TextField(null=True)
+	status = models.BooleanField(default=True)
+	publish = models.DateTimeField(auto_now_add=True)
+
+	def __str__(self):
+		return self.name
