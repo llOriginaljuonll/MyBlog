@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 
-from .forms import BlogForm
+from .forms import BlogForm, CommentForm
 from .models import Blog
 
 from django.views.generic import DetailView
@@ -32,10 +32,28 @@ def article_form(request):
 		return render(request, 'article_form.html', {'form': form})
 
 def blog_detail(request, blog_id):
+
 	blog = Blog.objects.get(pk=blog_id)
+	
 	blog.views = blog.views+1
 	blog.save()
-	return render(request, 'blog_detail.html', {'blog': blog})
+
+	comments = blog.comments.filter(status=True)
+
+	user_comment = None
+
+	if request.method == 'POST':
+		comment_form = CommentForm(request.POST)
+		if comment_form.is_valid():
+			user_comment = comment_form.save(commit=False)
+			user_comment.blog = blog
+			user_comment.save()
+
+			return HttpResponseRedirect(str(blog_id))
+	else:
+		comment_form = CommentForm()
+
+	return render(request, 'blog_detail.html', {'blog': blog, 'comments': user_comment, 'comments': comments, 'comment_form': comment_form})
 
 class BlogLikeView(DetailView):
 	model = Blog
@@ -82,6 +100,7 @@ def LikeView(request, id):
 		blog.likes.add(request.user)
 
 	return HttpResponse(reverse('blog:blog_like', args=[str(id)]))
+
 
 
 
